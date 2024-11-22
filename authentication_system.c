@@ -1,7 +1,9 @@
 #include <stdio.h>
-#include <conio.h>
-#include <windows.h>
+#include <stdio.h>
+#include <unistd.h>
+//#include <windows.h> windows specific
 #include <string.h> 
+#include <stdlib.h>
 #define ENTER 13
 #define TAB 9
 #define BCKSPC 8
@@ -34,7 +36,7 @@ void takepassword(char pwd[50]) {
     int i = 0; // Initialize i
     char ch;
     while (1) {
-        ch = getch();
+        ch = getchar();
         if (ch == ENTER || ch == TAB) {
             pwd[i] = '\0';
             break;
@@ -51,7 +53,7 @@ void takepassword(char pwd[50]) {
 }
 
 int main() {
-    system("color 0b");
+    //system("color 0b");
 
     FILE *fp;
     int opt;
@@ -102,7 +104,8 @@ int main() {
                 fclose(fp);
             } else {
                 printf("\nPasswords do not match");
-                Beep(750, 300);
+                //Beep(750, 300);   windows specific
+                printf("\a");   // ASCII Bell Character (produces a sound in most terminals)
             }
             break;
 
@@ -128,7 +131,8 @@ int main() {
                         printf("\n\n|Contact: %s", user.phone);
                     } else {
                         printf("\n\nInvalid password or username");
-                        Beep(800, 300);
+                        //Beep(800, 300); windows specific
+                        printf("\a");   // ASCII Bell Character (produces a sound in most terminals)
                     }
                     userFound = 1;
                     break;
@@ -136,7 +140,8 @@ int main() {
             }
             if (!userFound) {
                 printf("\nUser is not registered");
-                Beep(800, 300);
+                //Beep(800, 300); windows specific
+                printf("\a");   // ASCII Bell Character (produces a sound in most terminals)
             }
             fclose(fp);
             break;
